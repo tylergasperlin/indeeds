@@ -1,12 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import {createBottomTabNavigator} from 'react-navigation-tabs'
+import AuthScreen from './screens/AuthScreen'
+import WelcomeScreen from './screens/WelcomeScreen'
+import {createAppContainer} from 'react-navigation'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+const MainNavigator = createBottomTabNavigator({
+  welcome: {screen: WelcomeScreen},
+  auth: {screen: AuthScreen}
+})
+
+class App extends React.Component {
+  render(){
+
+    
+    return (
+      <View style={styles.container}>
+        <MainNavigator/>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -17,3 +30,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+export default createAppContainer(MainNavigator);
