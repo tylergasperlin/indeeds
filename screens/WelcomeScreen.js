@@ -14,7 +14,6 @@ class WelcomeScreen extends React.Component{
     onSlidesComplete = (navigation) => {
         //we get access to navigate function from react navigation library
         //since we render welcome screen with navigation we get a prop of navigation passed to our components
-        console.log('press')
         this.props.navigation.navigate('auth')
     }
 
