@@ -1,6 +1,8 @@
 import {AsyncStorage} from 'react-native'
+import {Facebook} from 'expo'
 import {
-    FACEBOOK_LOGIN_SUCCESS
+    FACEBOOK_LOGIN_SUCCESS,
+    FACEBOOK_LOGIN_FAIL
 } from './types'
 
 //method for persistence in redux store
@@ -14,11 +16,23 @@ export const facebookLogin = () => async dispatch => {
     let token = await AsyncStorage.getItem('fb_token')
     if(token) {
         //dispatch action saying fb login is done
+        dispatch({type: FACEBOOK_LOGIN_SUCCESS, payload: token })
     } else {
         //start fb login 
+        const doFacebookLogin = async dispatch => {
+            let {result, token} = await Facebook.logInWithReadPermissionsAsync('565826070869566', {
+                permissions: ['public_profile']
+            });
 
+            if (type=== 'cancel') {
+                //WE GET ACCESS TO DISPATCH FROM THUNK
+                //THIS IS A HELPER FUNCTION SO WE USE have to pass dispatch as a param
+                return dispatch({type: FACEBOOK_LOGIN_FAIL})
+            }
+            await AsyncStorage.setItem('fb_token', token)
+            dispatch({type: FACEBOOK_LOGIN_SUCCESS, payload: token})
+        }
     }
-
 }
 
 
