@@ -18,9 +18,10 @@ const MainNavigator = createBottomTabNavigator({
       map: {screen: MapScreen},
       deck: {screen: DeckScreen},
       review: {
-        screen: createStackNavigator({
-          review: {screen: ReviewScreen},
-          settings: {screen: SettingsScreen}
+        screen: createStackNavigator(
+          {
+            review: {screen: ReviewScreen},
+            settings: {screen: SettingsScreen}
         })
       }
     })

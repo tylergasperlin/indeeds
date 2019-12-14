@@ -1,18 +1,14 @@
 import React, {Component} from 'react'
 import {View, Text} from 'react-native'
+import {navigation, screenProps} from 'react-navigation'
 
 class ReviewScreen extends React.Component{
-    static navigationOptions = {
-        //these are properties of the create stack navigatior within app.js
-           title: 'Review Jobs'
-/*            header: () => {
-/*                return {
-                   //more properties of stack nav
-                   right: <Text>Go Right Do Right</Text>
-             //  } */
-           //} 
+        static navigationOptions =({navigation, screenProps}) => ({
+            title:'Review Jobs',
+            headerRight: <Text>Go Far Right</Text>
+        })
 
-    }
+    
 
     render(){
         return(
