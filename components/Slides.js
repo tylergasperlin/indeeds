@@ -1,13 +1,31 @@
 import React,{Component} from 'react' 
-import {View, Text, ScrollView} from 'react-native'
+import {View, Text, ScrollView, Dimensions} from 'react-native'
+import {Button} from 'react-native-elements'
+
+const SCREEN_WIDTH = Dimensions.get('window').width
 
 class Slides extends Component {
+    renderLastSlide(index){
+        if(index===this.props.data.length -1 ){
+            return (
+                <Button
+                    title='Onwards!'
+                    raised
+                />
+            )
+        }
+    }
+
     renderSlides(){
-        return this.props.data.map((slide) => {
+        return this.props.data.map((slide, index) => {
 
             return (
-                <View key={slide.text} style={styles.slideStyle}>
-                    <Text style={styles.slideText}> {slide.text} </Text>
+                <View 
+                    key={slide.text} 
+                    style={[styles.slideStyle, {backgroundColor: slide.color}]}
+                >
+                    <Text style={styles.textStyle}> {slide.text} </Text>
+                    {this.renderLastSlide(index)}
                 </View>
             )
 
@@ -17,8 +35,11 @@ class Slides extends Component {
         return(
             <ScrollView
                 horizontal
+                pagingEnabled
+                style={{flex:1}}
                 >
                 {this.renderSlides()}
+                
             </ScrollView>  
         )
     }
@@ -28,10 +49,12 @@ const styles = {
     slideStyle:{
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        width: SCREEN_WIDTH
     },
-    slideText: {
-        fontSize: 20,
+    textStyle: {
+        fontSize: 30,
+        color: 'white'
     }
 }
 
