@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {createBottomTabNavigator} from 'react-navigation-tabs'
 import {createStackNavigator} from 'react-navigation-stack'
@@ -31,21 +31,6 @@ const MainNavigator = createBottomTabNavigator({
   }
 })
 
-class App extends React.Component {
-  render(){
-
-    
-    return (
-      <Provider store={store}>
-        <View style={styles.container}>
-          <MainNavigator/>
-        </View>
-      </Provider>
-
-    );
-  }
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -56,4 +41,23 @@ const styles = StyleSheet.create({
 });
 
 
-export default createAppContainer(MainNavigator);
+export default class App extends React.Component {
+  render(){
+
+    
+    return (
+      <Provider store={store}>
+        <View style={[{flex:1}]}>
+          <AppContainer/>
+        </View>
+      </Provider>
+
+    );
+  }
+}
+
+
+const AppContainer = createAppContainer(MainNavigator);
+
+
+//export default createAppContainer(MainNavigator);

@@ -14,26 +14,32 @@ import {
 //which allows us to dispatch a function at any time
 export const facebookLogin = () => async dispatch => {
     let token = await AsyncStorage.getItem('fb_token')
+    console.log('facebook log')
     if(token) {
+        console.log('facebook log token')
+
         //dispatch action saying fb login is done
         dispatch({type: FACEBOOK_LOGIN_SUCCESS, payload: token })
     } else {
+        console.log('facebook log token2')
+        //console.log(type)
         //start fb login 
-        const doFacebookLogin = async dispatch => {
-            let {result, token} = await Facebook.logInWithReadPermissionsAsync('565826070869566', {
-                permissions: ['public_profile']
-            });
-
-            if (type=== 'cancel') {
-                //WE GET ACCESS TO DISPATCH FROM THUNK
-                //THIS IS A HELPER FUNCTION SO WE USE have to pass dispatch as a param
-                return dispatch({type: FACEBOOK_LOGIN_FAIL})
-            }
-            await AsyncStorage.setItem('fb_token', token)
-            dispatch({type: FACEBOOK_LOGIN_SUCCESS, payload: token})
-        }
+        doFacebookLogin()
     }
 }
 
 
+const doFacebookLogin = async dispatch => {
+    console.log('dispatch dofacebook')
+    let {result, token} = await Facebook.logInWithReadPermissionsAsync('565826070869566', {
+        permissions: ['public_profile']
+    });
 
+    if (type=== 'cancel') {
+        //WE GET ACCESS TO DISPATCH FROM THUNK
+        //THIS IS A HELPER FUNCTION SO WE USE have to pass dispatch as a param
+        return dispatch({type: FACEBOOK_LOGIN_FAIL})
+    }
+    await AsyncStorage.setItem('fb_token', token)
+    dispatch({type: FACEBOOK_LOGIN_SUCCESS, payload: token})
+}
