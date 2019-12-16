@@ -14,7 +14,7 @@ import store from './store'
 
 
 const MainNavigator = createBottomTabNavigator({
-  welcome: {screen: WelcomeScreen},
+  welcome: {screen: WelcomeScreen, navigationOptions:{tabBarVisible:false}},
   auth: {screen: AuthScreen},
   main: {
     screen: createBottomTabNavigator({
